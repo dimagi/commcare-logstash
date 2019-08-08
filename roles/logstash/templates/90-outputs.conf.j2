@@ -1,0 +1,33 @@
+##
+# {{ ansible_managed }}
+#
+
+output {
+  upd {
+    host => "{{ datadog_statsd_host|default('localhost') }}"
+    port => {{ datadog_statsd_port|default(8125) }}
+    codec => codec => plain {
+        format => "nginx.timing:%<request_time>f|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group}"
+    }
+    id => "logstash-nginx-timing"
+  }
+
+  upd {
+    host => "{{ datadog_statsd_host|default('localhost') }}"
+    port => {{ datadog_statsd_port|default(8125) }}
+    codec => codec => plain {
+        format => "nginx.requests:1.0|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},cache_status:%{cache_status}"
+    }
+    dd_tags => [ "environment:{{ env_monitoring_id }}", "domain:%{domain}", "http_method:%{http_method}", "status_code:%{status_code}", "url_group:%{url_group}", "cache_status:%{cache_status}"]
+    id => "logstash-nginx-requests"
+  }
+
+  upd {
+    host => "{{ datadog_statsd_host|default('localhost') }}"
+    port => {{ datadog_statsd_port|default(8125) }}
+    codec => codec => plain {
+        format => "nginx.apdex:%<apdex>f|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group}"
+    }
+    id => "logstash-nginx-apdex"
+  }
+}

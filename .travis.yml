@@ -24,6 +24,10 @@ before_script:
 script:
   # Run tests.
   - molecule test
+  - TESTS_PATH=tests/logstash/
+    FILTERS_PATH=roles/logstash/templates/10-filters.conf.j2
+    LOGSTASH_BIN=~/logstash-7.0.0/bin
+    ~/logstash-filter-verifier ${TESTS_PATH} ${FILTERS_PATH} --logstash-path ${LOGSTASH_BIN}/logstash --sockets
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

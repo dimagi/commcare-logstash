@@ -1,5 +1,5 @@
 ---
-- name: Ensure dependency is installed (Ubuntu).
+- name: Ensure dependency is installed
   apt: name=apt-transport-https state=present
 
 - name: Add Elasticsearch apt key.
@@ -13,3 +13,12 @@
     repo: 'deb https://artifacts.elastic.co/packages/{{ filebeat_version }}/apt stable main'
     state: present
     update_cache: true
+
+- name: Install Filebeat.
+  package: name=filebeat state=present
+
+- name: Ensure Filebeat is started and enabled at boot.
+  service:
+    name: filebeat
+    state: started
+    enabled: true
