@@ -1,0 +1,3 @@
+---
+- src: sansible.logstash
+- src: geerlingguy.filebeat 
