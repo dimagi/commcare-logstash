@@ -1,0 +1,16 @@
+filebeat_version: 7.x
+filebeat_prospectors:
+  - input_type: log
+    paths:
+      - "{{ log_home }}/{{ deploy_env }}-timing.log"
+    fields:
+      type: nginx-timing
+    fields_under_root: true
+ 
+  - input_type: log
+    paths:
+      - "{{ log_home }}/{{ item.server.file_name }}-{{ nginx_error_log_name }}"
+    fields:
+      type: nginx-error
+    fields_under_root: true
+

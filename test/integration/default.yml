@@ -2,6 +2,9 @@
 - name: test-kitchen
   hosts: all
   vars:
+    sansible_java_version: 8     
+    env_monitoring_id: test
+    DATADOG_API_KEY: 123
     filebeat_inputs:
       - type: log
         paths:

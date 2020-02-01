@@ -1,9 +1,0 @@
----
-username: kitchen
-ssh_key: "/home/rohit/dimagi.com/commcare-logstash/.kitchen/docker_id_rsa"
-image_id: f3575c807d69
-container_id: a811593d001a09bbd41a776482e34bf18d78fa1bdcd192f4230bc908f8db5000
-hostname: localhost
-port: 32776
-last_action: create
-last_error: Kitchen::ActionFailed

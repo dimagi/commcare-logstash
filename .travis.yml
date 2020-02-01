@@ -1,33 +1,11 @@
 ---
-language: python
+sudo: required
+# docker is required to run tests
 services: docker
 
-env:
-  global:
-    - ROLE_NAME: filebeat
-  matrix:
-    - MOLECULE_DISTRO: centos7
-    - MOLECULE_DISTRO: ubuntu1804
-    - MOLECULE_DISTRO: ubuntu1604
-    - MOLECULE_DISTRO: debian9
-
 install:
-  # Install test dependencies.
-  - pip install molecule docker
-
-before_script:
-  # Use actual Ansible Galaxy role name for the project directory.
-  - cd ../
-  - mv ansible-role-$ROLE_NAME geerlingguy.$ROLE_NAME
-  - cd geerlingguy.$ROLE_NAME
+  - bundle install
 
 script:
-  # Run tests.
-  - molecule test
-  - TESTS_PATH=tests/logstash/
-    FILTERS_PATH=roles/logstash/templates/10-filters.conf.j2
-    LOGSTASH_BIN=~/logstash-7.0.0/bin
-    ~/logstash-filter-verifier ${TESTS_PATH} ${FILTERS_PATH} --logstash-path ${LOGSTASH_BIN}/logstash --sockets
-
-notifications:
-  webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  # run kitchen tests (destroy, create, converge, setup, verify and destroy)
+  - kitchen test

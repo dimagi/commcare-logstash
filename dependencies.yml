@@ -1,3 +1,4 @@
 ---
 - src: sansible.logstash
-- src: geerlingguy.filebeat 
+- src: geerlingguy.filebeat
+- src: sansible.java
