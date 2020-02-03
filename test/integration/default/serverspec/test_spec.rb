@@ -13,5 +13,5 @@ describe package('filebeat') do
   end
 
 describe command(test_command) do
-        its(:exit_status) {should eq 0}
+    its(:exit_status) {should eq 0}
 end

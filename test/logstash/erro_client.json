@@ -15,13 +15,14 @@
         "expected": [
           {
             "type": "nginx-error",
-            "@timestamp": "2020/01/24 02:07:30",
-            "http_timestamp": "24/Jan/2020 02:07:30",
-            "http_method": "POST",
+            "@timestamp": "2020-01-24T02:07:30.000Z",
+            "http_timestamp": "2020/01/24 02:07:30",
+            "verb": "POST",
             "err_severity": "warn",
-            "err_message": "buffer_to_file/client",
-            "domain": "",
-            "tags": []
+            "err_message": "a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0006209677",
+            "domain": "icds-cas",
+            "server": "www.icds-cas.gov.in",
+            "clientip": "157.42.120.30"
           }
         ]
       }

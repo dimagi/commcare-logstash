@@ -15,16 +15,16 @@
         "expected": [
           {
             "type": "nginx-error",
-            "@timestamp": "2020/01/29 08:18:05",
-            "http_timestamp": "01/Jan/2020 08:18:05",
-            "http_method": "GET",
+            "@timestamp": "2020-01-29T08:18:05.000Z",
+            "http_timestamp": "2020/01/29 08:18:05",
+            "verb": "GET",
             "err_severity": "error",
-            "err_message": "limiting·requests,·excess:·50.090·by·zone·\"app_downloads\"",
-            "domain": "",
-            "tags": []
+            "err_message": "limiting requests, excess: 50.090 by zone \"app_downloads\"",
+            "domain": "icds-cas",
+            "clientip": "223.188.118.33",
+            "server": "cas.commcarehq.org"
           }
         ]
       }
     ]
-  }
-  
+}
