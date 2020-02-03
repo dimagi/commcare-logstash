@@ -13,6 +13,11 @@ platforms:
       provision_command:
         - apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:ansible/ansible
         - apt-get update && apt-get -y -q install rsync ansible python-apt python-pycurl
+        - wget -q https://dl.google.com/go/go1.13.7.linux-amd64.tar.gz
+        - tar -C /usr/local -xzf go1.13.7.linux-amd64.tar.gz
+        - wget -q https://github.com/magnusbaeck/logstash-filter-verifier/releases/download/1.6.0/logstash-filter-verifier_1.6.0_linux_386.tar.gz
+        - mkdir /usr/local/logstash-filter-verifier
+        - tar -C /usr/local/logstash-filter-verifier -xf logstash-filter-verifier_1.6.0_linux_386.tar.gz
       use_sudo: false
 
 provisioner:
