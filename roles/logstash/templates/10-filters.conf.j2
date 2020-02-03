@@ -102,7 +102,7 @@ filter {
     if [type] == "nginx-error" {
         grok {
             match => [
-                "message", "(?<timestamp>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[%{DATA:err_severity}\] (%{NUMBER:pid:int}#%{NUMBER}: \*%{NUMBER}|\*%{NUMBER}) %{DATA:err_message}(?:, client: (?<clientip>%{IP}|%{HOSTNAME}))(?:, server: %{IPORHOST:server})(?:, request: "%{WORD:verb} %{URIPATHPARAM:request} HTTP/%{NUMBER:httpversion}")?(?:, host: "%{IPORHOST:host}"))"
+                "message",  "(?<http_timestamp>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[%{DATA:err_severity}\] (%{NUMBER:pid:int}#%{NUMBER}: \*%{NUMBER}|\*%{NUMBER}) %{DATA:err_message}(?:, client: (?<clientip>%{IP}|%{HOSTNAME}))(?:, server: %{IPORHOST:server})(?:, request: \"%{WORD:verb} %{URIPATHPARAM:request} HTTP/%{NUMBER:httpversion}\")?(?:, host: \"%{IPORHOST:host}\")"
             ]
         }
          # Add domain
@@ -119,7 +119,7 @@ filter {
 
         # Parse date
         date {
-            match => [ "timestamp" , "dd/MMM/YYYY HH:mm:ss" ]
+            match => [ "http_timestamp" , "dd/MMM/YYYY HH:mm:ss" ]
         }
         
         # Convert url group to desire values

@@ -1,0 +1,30 @@
+{
+    "codec": "line",
+    "fields": {
+      "type": "nginx-error"
+    },
+    "ignore": [
+      "host"
+    ],
+    "testcases": [
+      {
+        "description": "Error Upstream",
+        "input": [
+            "2020/01/24 02:25:42 [warn] 130865#130865: *28499547 an upstream response is buffered to a temporary file /var/cache/nginx/proxy_temp/6/67/0006228676 while reading upstream, client: 47.9.208.111, server: www.icds-cas.gov.in, request: \"GET /a/icds-cas/cloudcare/apps/v2/ HTTP/2.0\", upstream: \"http://100.71.188.205:9010/a/icds-cas/cloudcare/apps/v2/\", host: \"www.icds-cas.gov.in\""
+        ],
+        "expected": [
+          {
+            "type": "nginx-error",
+            "@timestamp": "2020/01/24 02:25:42",
+            "http_timestamp": "24/Jan/2020 02:25:42",
+            "http_method": "GET",
+            "err_severity": "warn",
+            "err_message": "buffer_to_file/upstream",
+            "domain": "",
+            "tags": []
+          }
+        ]
+      }
+    ]
+  }
+  

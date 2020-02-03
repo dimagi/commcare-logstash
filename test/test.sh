@@ -13,5 +13,5 @@ TESTS_PATH=${PWD}/test/logstash/
 FILTERS_PATH=/etc/logstash/conf.d/10-filters.conf
 LOGSTASH_BIN=/usr/share/logstash/bin/logstash
 
-./logstash-filter-verifier ${TESTS_PATH} ${FILTERS_PATH} --logstash-path ${LOGSTASH_BIN}/logstash
+./logstash-filter-verifier ${TESTS_PATH} ${FILTERS_PATH} --logstash-path ${LOGSTASH_BIN}/logstash --sockets
 
