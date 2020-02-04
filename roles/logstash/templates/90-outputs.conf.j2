@@ -30,4 +30,13 @@ output {
     }
     id => "logstash-nginx-apdex"
   }
+
+  upd {
+    host => "{{ datadog_statsd_host|default('localhost') }}"
+    port => {{ datadog_statsd_port|default(8125) }}
+    codec => codec => plain {
+        format => "nginx.error_logs:1.0|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},log_level:%{err_severity},error_type:%{err_message}"
+    }
+    id => "logstash-nginx-error_logs"
+  }
 }

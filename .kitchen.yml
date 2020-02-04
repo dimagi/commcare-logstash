@@ -1,0 +1,45 @@
+---
+driver:
+  name: docker
+#enble to true if you are not s root on your workstation  
+use_sudo: false
+
+platforms:
+  - name: ubuntu-18.04
+    driver_config:
+      image: ubuntu:18.04
+      privileged: true
+      run_command: /bin/systemd
+      provision_command:
+        - apt-get update && apt-get install -y software-properties-common && add-apt-repository -y ppa:ansible/ansible
+        - apt-get update && apt-get -y -q install rsync ansible python-apt python-pycurl
+        - wget -q https://dl.google.com/go/go1.13.7.linux-amd64.tar.gz
+        - tar -C /usr/local -xzf go1.13.7.linux-amd64.tar.gz
+        - wget -q https://github.com/magnusbaeck/logstash-filter-verifier/releases/download/1.6.0/logstash-filter-verifier_1.6.0_linux_386.tar.gz
+        - mkdir /usr/local/logstash-filter-verifier
+        - tar -C /usr/local/logstash-filter-verifier -xf logstash-filter-verifier_1.6.0_linux_386.tar.gz
+      use_sudo: false
+
+provisioner:
+  name: ansible_playbook
+  hosts: test_kitchen
+  requirements_path: dependencies.yml
+  roles_path: ./roles
+  additional_copy_path: "test"
+  ansible_verbose: false
+  ansible_verbosity: 2
+  require_ansible_repo: false
+  require_ansible_omnibus: false
+  require_chef_for_busser: false
+  ansible_connection: ssh
+
+verifier:
+  name: serverspec
+  use_sudo: yes
+  sudo_path: true
+
+suites:
+  - name: default
+    verifier:
+      patterns:
+        - test/integration/default/serverspec/test_spec.rb

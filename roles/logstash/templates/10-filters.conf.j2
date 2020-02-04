@@ -98,6 +98,59 @@ filter {
         }
 
     }
+    
+    if [type] == "nginx-error" {
+        grok {
+            match => [
+                "message",  "(?<http_timestamp>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[%{DATA:err_severity}\] (%{NUMBER:pid:int}#%{NUMBER}: \*%{NUMBER}|\*%{NUMBER}) %{DATA:err_message}(?:, client: (?<clientip>%{IP}|%{HOSTNAME}))(?:, server: %{IPORHOST:server})(?:, request: \"%{WORD:verb} %{URIPATHPARAM:request} HTTP/%{NUMBER:httpversion}\")?(?:, upstream: \"%{DATA:upstream}\")?(?:, host: \"%{IPORHOST:host}\")?(?:, referrer: \"%{URI:referrer}\")?"
+            ]
+        }
+         # Add domain
+        grok {
+            match => { "message" => "/a/(?<domain>[0-9a-z-]+)" }
+            tag_on_failure => ["_domainparsefailure"]
+        }
+        if "_domainparsefailure" in [tags] {
+            mutate {
+                add_field => { "domain" => "" }
+                remove_tag => [ "_domainparsefailure" ]
+            }
+        }
+
+        # Parse date
+        date {
+            match => [ "http_timestamp" , "YYYY/MM/dd HH:mm:ss" ]
+        }
+        
+        # Replace error message with custom message
+        if [err_message] =~ "an upstream response is buffered to a temporary file" {
+            mutate{
+                replace => { "[err_message]" => "buffer_to_file/upstream" }
+            } 
+        }
+        else if [err_message] =~ "a client request body is buffered to a temporary file" {
+            mutate{
+                replace => { "[err_message]" => "buffer_to_file/client" }
+            } 
+        }
+        else if [err_message] =~ "connect\(\) failed \(111: Connection refused\) while connecting to upstream" {
+            mutate{
+                replace => { "[err_message]" => "connection_refused" }
+            } 
+        }
+        else{
+            mutate{
+                replace => { "[err_message]" => "others" }
+            } 
+        }
+
+        # Cleanup
+        mutate {
+            remove_field => [ "request", "bytes", "httpversion", "message", "pid", "referrer" ]
+        }
+
+    }
+
 
     if "_grokparsefailure" in [tags] {
         drop { }

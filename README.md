@@ -1,7 +1,29 @@
 # Ansible Role: Logstash setup for CommCare
 
-Work in progress.
+## Testing locally
 
-Based off https://github.com/geerlingguy/ansible-role-filebeat
+Requirements:
+* Ruby (use [Ruby Version Manager](https://rvm.io/))
+* Docker
 
-See also https://github.com/dimagi/commcare-cloud/compare/sk/logstash?expand=1
+1. `bundle install`
+
+2. Run the tests
+
+    `kitchen verify`
+
+Run repeated tests:
+
+    ```
+    kitchen converge
+    kitchen verify
+    ```
+
+Run tests manually:
+
+    ```
+    kitchen converge
+    kitchen login
+
+    $ cd /tmp/kitchen; /bin/sh -c /tmp/kitchen/test/test.sh
+    ```
