@@ -102,7 +102,7 @@ filter {
     if [type] == "nginx-error" {
         grok {
             match => [
-                "message",  "(?<http_timestamp>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[%{DATA:err_severity}\] (%{NUMBER:pid:int}#%{NUMBER}: \*%{NUMBER}|\*%{NUMBER}) %{DATA:err_message}(?:, client: (?<clientip>%{IP}|%{HOSTNAME}))(?:, server: %{IPORHOST:server})(?:, request: \"%{WORD:verb} %{URIPATHPARAM:request} HTTP/%{NUMBER:httpversion}\")?(?:, host: \"%{IPORHOST:host}\")"
+                "message",  "(?<http_timestamp>\d{4}/\d{2}/\d{2} \d{2}:\d{2}:\d{2}) \[%{DATA:err_severity}\] (%{NUMBER:pid:int}#%{NUMBER}: \*%{NUMBER}|\*%{NUMBER}) %{DATA:err_message}(?:, client: (?<clientip>%{IP}|%{HOSTNAME}))(?:, server: %{IPORHOST:server})(?:, request: \"%{WORD:verb} %{URIPATHPARAM:request} HTTP/%{NUMBER:httpversion}\")?(?:, upstream: \"%{DATA:upstream}\")?(?:, host: \"%{IPORHOST:host}\")?(?:, referrer: \"%{URI:referrer}\")?"
             ]
         }
          # Add domain
@@ -133,7 +133,7 @@ filter {
 
         # Cleanup
         mutate {
-            remove_field => [ "request", "bytes", "httpversion", "message", "pid" ]
+            remove_field => [ "request", "bytes", "httpversion", "message", "pid", "referrer" ]
         }
 
     }
