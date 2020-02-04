@@ -19,7 +19,7 @@
           "http_timestamp": "2020/01/24 02:25:42",
           "verb": "GET",
           "err_severity": "warn",
-          "err_message": "an upstream response is buffered to a temporary file /var/cache/nginx/proxy_temp/6/67/0006228676 while reading upstream",
+          "err_message": "buffer_to_file/upstream",
           "domain": "icds-cas",
           "server": "www.icds-cas.gov.in",
           "clientip": "47.9.208.111",

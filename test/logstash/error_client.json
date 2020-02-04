@@ -19,7 +19,7 @@
             "http_timestamp": "2020/01/24 02:07:30",
             "verb": "POST",
             "err_severity": "warn",
-            "err_message": "a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0006209677",
+            "err_message": "buffer_to_file/client",
             "domain": "icds-cas",
             "server": "www.icds-cas.gov.in",
             "clientip": "157.42.120.30"

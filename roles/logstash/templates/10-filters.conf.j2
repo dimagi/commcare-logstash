@@ -122,13 +122,26 @@ filter {
             match => [ "http_timestamp" , "YYYY/MM/dd HH:mm:ss" ]
         }
         
-        # Convert url group to desire values
-        alter {
-            condrewrite => [
-                "err_message", "connect\(\) failed \(111: Connection refused\) while connecting to upstream", "connection_refused",
-                "err_message", "an upstream response is buffered to a temporary file", "buffer_to_file/upstream" ,
-                "err_message", "a client request body is buffered to a temporary file", "buffer_to_file/client"
-            ]
+        # Replace error message with custom message
+        if [err_message] =~ "an upstream response is buffered to a temporary file" {
+            mutate{
+                replace => { "[err_message]" => "buffer_to_file/upstream" }
+            } 
+        }
+        else if [err_message] =~ "a client request body is buffered to a temporary file" {
+            mutate{
+                replace => { "[err_message]" => "buffer_to_file/client" }
+            } 
+        }
+        else if [err_message] =~ "connect\(\) failed \(111: Connection refused\) while connecting to upstream" {
+            mutate{
+                replace => { "[err_message]" => "connection_refused" }
+            } 
+        }
+        else{
+            mutate{
+                replace => { "[err_message]" => "others" }
+            } 
         }
 
         # Cleanup
