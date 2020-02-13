@@ -1,5 +1,5 @@
 namespace: "dimagi"
-name: "commcare-logstash"
+name: "commcare_logstash"
 version: "0.1.0"
 readme: "README.md"
 authors:
