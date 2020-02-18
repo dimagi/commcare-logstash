@@ -31,19 +31,21 @@ filter {
         }
 
         # Set apdex
-        if [request_time] > 12 {
-            mutate {
-                add_field => { "apdex" => 0 }
+        if [request_time] {
+            if [request_time] > 12 {
+                mutate {
+                    add_field => { "apdex" => 0 }
+                }
+            } else if [request_time] > 3 {
+                mutate {
+                    add_field => { "apdex" => 0.5 }
+                }
+            } else {
+                mutate {
+                    add_field => { "apdex" => 1 }
+                }
             }
-        } else if [request_time] > 3 {
-            mutate {
-                add_field => { "apdex" => 0.5 }
-            }
-        } else {
-            mutate {
-                add_field => { "apdex" => 1 }
-            }
-        }
+        }    
         mutate {
             convert => { "apdex" => "float" }
         }
@@ -133,7 +135,7 @@ filter {
                 replace => { "[err_message]" => "buffer_to_file/client" }
             } 
         }
-        else if [err_message] =~ "connect\(\) failed \(111: Connection refused\) while connecting to upstream" {
+        else if [err_message] =~ "failed \(111: Connection refused\) while connecting to upstream" {
             mutate{
                 replace => { "[err_message]" => "connection_refused" }
             } 

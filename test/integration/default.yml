@@ -1,15 +1,41 @@
 ---
-- name: test-kitchen
+- name: FileBeat
   hosts: all
+  become: yes
+  gather_facts: true
   vars:
-    sansible_java_version: 8     
-    env_monitoring_id: test
-    DATADOG_API_KEY: 123
+    sansible_java_version: 8
+    filebeat_version: 7.x
     filebeat_inputs:
       - type: log
         paths:
           - /var/log/messages
           - /var/log/*.log
-  roles:
-    - role: filebeat
-    - role: logstash
+  tasks:
+    - include_role:
+        name: geerlingguy.filebeat      
+    - import_role:   
+        name: filebeat
+  tags: filebeat
+
+- name: Logstash
+  hosts: all
+  become: yes
+  gather_facts: true
+  vars:
+    env_monitoring_id: test
+    DATADOG_API_KEY: 123
+    sansible_logstash_family: 7.x
+    sansible_java_version: 8
+    sansible_logstash_version: 1:7.5.2-1
+    sansible_logstash_plugins:
+      - logstash-patterns-core
+      - logstash-filter-alter
+      - logstash-output-datadog_metrics
+    sansible_logstash_default_config: no
+  tasks:
+    - include_role:
+        name: sansible.logstash
+    - import_role: 
+        name: logstash
+  tags: logstash
