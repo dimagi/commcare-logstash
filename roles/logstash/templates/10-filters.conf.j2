@@ -71,6 +71,18 @@ filter {
             mutate {
                 add_field => { "url_group" => "login" }
             }
+        } else if [request] =~ "/home/" {
+            mutate {
+                add_field => { "url_group" => "home" }
+            }
+        } else if [request] =~ "/pricing/" {
+            mutate {
+                add_field => { "url_group" => "pricing" }
+            }
+        } else if [request] =~ "/formplayer/" {
+            mutate {
+                add_field => { "url_group" => "formplayer" }
+            }
         } else if [request] =~ "/static/" or [request] =~ "favicon.ico" {
             mutate {
                 add_field => { "url_group" => "static" }
