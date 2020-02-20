@@ -107,7 +107,7 @@ filter {
             }
         } else {
             mutate {
-                add_field => { "url_group" => "%{request}" }
+                add_field => { "url_group" => "other" }
             }
         }
 
