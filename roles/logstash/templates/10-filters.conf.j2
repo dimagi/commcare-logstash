@@ -67,6 +67,10 @@ filter {
             mutate {
                 add_field => { "url_group" => "mm/other" }
             }
+        } else if [request] =~ "/accounts/login/" {
+            mutate {
+                add_field => { "url_group" => "login" }
+            }
         } else if [request] =~ "/static/" or [request] =~ "favicon.ico" {
             mutate {
                 add_field => { "url_group" => "static" }
