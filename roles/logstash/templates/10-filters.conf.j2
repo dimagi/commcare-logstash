@@ -51,10 +51,21 @@ filter {
         }
 
         # Parse url_group
-        if [request] =~ "/hq/multimedia/file/" {
+        if [request] =~ "/hq/multimedia/file/CommCareAudio" {
             mutate {
-                split => ["request", "/"]
-                add_field => { "url_group" => "%{[request][4]}" }
+                add_field => { "url_group" => "mm/audio" }
+            }
+        } else if [request] =~ "/hq/multimedia/file/CommCareVideo" {
+            mutate {
+                add_field => { "url_group" => "mm/video" }
+            }
+        } else if [request] =~ "/hq/multimedia/file/CommCareImage" {
+            mutate {
+                add_field => { "url_group" => "mm/image" }
+            }
+        } else if [request] =~ "/hq/multimedia/file/" {
+            mutate {
+                add_field => { "url_group" => "mm/other" }
             }
         } else if [request] =~ "/static/" or [request] =~ "favicon.ico" {
             mutate {
@@ -82,16 +93,6 @@ filter {
             mutate {
                 add_field => { "url_group" => "%{request}" }
             }
-        }
-
-        # convert url groups to desired values
-        alter {
-            condrewrite => [
-                "url_group", "CommCareAudio", "mm/audio",
-                "url_group", "CommCareVideo", "mm/video",
-                "url_group", "CommCareImage", "mm/image",
-                "url_group", "/accounts/login/", "login"
-            ]
         }
 
         # Cleanup
