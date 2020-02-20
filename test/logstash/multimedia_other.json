@@ -8,9 +8,9 @@
   ],
   "testcases": [
     {
-      "description": "pricing",
+      "description": "api",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /pricing/ HTTP/1.1 200 0.2"
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/other/123456/vid_daily_feeding.mp4 HTTP/1.1 200 3.2"
       ],
       "expected": [
         {
@@ -19,12 +19,12 @@
           "http_timestamp": "28/Oct/2015:15:18:14 +0000",
           "cache_status": "-",
           "http_method": "GET",
-          "request_time": 0.2,
+          "request_time": 3.2,
           "status_code": "200",
-          "url_group": "pricing",
-          "tags": [],
+          "url_group": "mm/other",
           "domain": "",
-          "apdex": 1
+          "tags": [],
+          "apdex": 0.5
         }
       ]
     }
