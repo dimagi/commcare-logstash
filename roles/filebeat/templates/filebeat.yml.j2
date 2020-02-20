@@ -1,6 +1,12 @@
 filebeat.inputs:
-{{ filebeat_inputs | to_nice_yaml }}
-
+{% for item in filebeat_inputs %}
+- type: log
+  paths:
+    - {{ item['path'] }}
+  fields:
+    type: {{ item['tags'] }}
+  fields_under_root: true
+{% endfor %}
 # Configure what outputs to use when sending the data collected by the beat.
 # Multiple outputs may be used.
 
