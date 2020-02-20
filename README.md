@@ -10,10 +10,6 @@ Requirements:
 
 2. Run the tests
 
-    `kitchen verify`
-
-Run repeated tests:
-
     ```
     kitchen converge
     kitchen verify
