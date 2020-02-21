@@ -24,7 +24,8 @@
           "url_group": "mm/video",
           "domain": "",
           "tags": [],
-          "apdex": 0.5
+          "apdex": 0.5,
+          "referer_group": ""
         }
       ]
     }

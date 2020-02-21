@@ -24,7 +24,8 @@
           "url_group": "mm/image",
           "domain": "",
           "tags": [],
-          "apdex": 1
+          "apdex": 1,
+          "referer_group": ""
         }
       ]
     }

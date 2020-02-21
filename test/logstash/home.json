@@ -24,7 +24,8 @@
           "url_group": "home",
           "tags": [],
           "domain": "",
-          "apdex": 0
+          "apdex": 0,
+          "referer_group": ""
         }
       ]
     }

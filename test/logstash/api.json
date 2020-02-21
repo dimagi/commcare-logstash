@@ -23,7 +23,8 @@
           "status_code": "200",
           "url_group": "api",
           "domain": "uth-rhd",
-          "apdex": 1
+          "apdex": 1,
+          "referer_group": ""
         }
       ]
     }
