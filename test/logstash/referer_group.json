@@ -24,7 +24,6 @@
           "url_group": "icds_dashboard",
           "domain": "anydomain",
           "apdex": 1,
-          "tags": [],
           "referer_group": "icds_dashboard"
         }
       ]
