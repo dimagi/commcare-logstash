@@ -15,11 +15,20 @@ Requirements:
     kitchen verify
     ```
 
-Run tests manually:
+    You can also run tests manually:
 
     ```
-    kitchen converge
+    kitchen exec -c 'sudo /tmp/kitchen/test/test.sh'
+    ```
+   
+    OR
+   
+    ``` 
     kitchen login
-
-    $ cd /tmp/kitchen; /bin/sh -c /tmp/kitchen/test/test.sh
+    $ sudo /tmp/kitchen/test/test.sh 
     ```
+
+## References
+
+* [Grok patterns](https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns)
+* [Grok Debugger](https://grokdebug.herokuapp.com/)

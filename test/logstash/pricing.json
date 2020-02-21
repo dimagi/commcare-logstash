@@ -24,7 +24,8 @@
           "url_group": "pricing",
           "tags": [],
           "domain": "",
-          "apdex": 1
+          "apdex": 1,
+          "referer_group": ""
         }
       ]
     }

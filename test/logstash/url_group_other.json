@@ -24,7 +24,8 @@
           "url_group": "other",
           "domain": "",
           "apdex": 1,
-          "tags": []
+          "tags": [],
+          "referer_group": ""
         }
       ]
     }

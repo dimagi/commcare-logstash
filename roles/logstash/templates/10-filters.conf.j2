@@ -2,11 +2,77 @@
 # {{ ansible_managed }}
 #
 
+{%- macro url_group(input_field, output_field) -%}
+        if ![{{ input_field}}] {
+            mutate {
+                add_field => { "{{ output_field }}" => "" }
+            }
+        } else if [{{ input_field }}] =~ "/hq/multimedia/file/CommCareAudio" {
+            mutate {
+                add_field => { "{{ output_field }}" => "mm/audio" }
+            }
+        } else if [{{ input_field }}] =~ "/hq/multimedia/file/CommCareVideo" {
+            mutate {
+                add_field => { "{{ output_field }}" => "mm/video" }
+            }
+        } else if [{{ input_field }}] =~ "/hq/multimedia/file/CommCareImage" {
+            mutate {
+                add_field => { "{{ output_field }}" => "mm/image" }
+            }
+        } else if [{{ input_field }}] =~ "/hq/multimedia/file/" {
+            mutate {
+                add_field => { "{{ output_field }}" => "mm/other" }
+            }
+        } else if [{{ input_field }}] =~ "/accounts/login/" {
+            mutate {
+                add_field => { "{{ output_field }}" => "login" }
+            }
+        } else if [{{ input_field }}] =~ "/home/" {
+            mutate {
+                add_field => { "{{ output_field }}" => "home" }
+            }
+        } else if [{{ input_field }}] =~ "/pricing/" {
+            mutate {
+                add_field => { "{{ output_field }}" => "pricing" }
+            }
+        } else if [{{ input_field }}] =~ "/formplayer/" {
+            mutate {
+                add_field => { "{{ output_field }}" => "formplayer" }
+            }
+        } else if [{{ input_field }}] =~ "/static/" or [{{ input_field }}] =~ "favicon.ico" {
+            mutate {
+                add_field => { "{{ output_field }}" => "static" }
+            }
+        } else if [{{ input_field }}] =~ "^/a/[0-9a-z-]+" {
+            mutate {
+                split => ["{{ input_field }}", "/"]
+            }
+            if "phone" in [{{ input_field }}] {
+                mutate {
+                    add_field => { "{{ output_field }}" => "%{[{{ input_field }}][3]}/%{[{{ input_field }}][4]}" }
+                }
+            } else {
+                mutate {
+                    add_field => { "{{ output_field }}" => "%{[{{ input_field }}][3]}" }
+                }
+                alter {
+                    coalesce => [
+                        "{{ output_field }}", "{%raw%}%{{%endraw%}{{ output_field }}}", "other"
+                    ]
+                }
+            }
+        } else {
+            mutate {
+                add_field => { "{{ output_field }}" => "other" }
+            }
+        }
+{%- endmacro %}
+
 filter {
     if [type] == "nginx-timing" {
         grok {
             match => [
-                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:request} HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time}"
+                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:request} HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time}( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
             ]
         }
         # Add domain
@@ -51,69 +117,12 @@ filter {
         }
 
         # Parse url_group
-        if [request] =~ "/hq/multimedia/file/CommCareAudio" {
-            mutate {
-                add_field => { "url_group" => "mm/audio" }
-            }
-        } else if [request] =~ "/hq/multimedia/file/CommCareVideo" {
-            mutate {
-                add_field => { "url_group" => "mm/video" }
-            }
-        } else if [request] =~ "/hq/multimedia/file/CommCareImage" {
-            mutate {
-                add_field => { "url_group" => "mm/image" }
-            }
-        } else if [request] =~ "/hq/multimedia/file/" {
-            mutate {
-                add_field => { "url_group" => "mm/other" }
-            }
-        } else if [request] =~ "/accounts/login/" {
-            mutate {
-                add_field => { "url_group" => "login" }
-            }
-        } else if [request] =~ "/home/" {
-            mutate {
-                add_field => { "url_group" => "home" }
-            }
-        } else if [request] =~ "/pricing/" {
-            mutate {
-                add_field => { "url_group" => "pricing" }
-            }
-        } else if [request] =~ "/formplayer/" {
-            mutate {
-                add_field => { "url_group" => "formplayer" }
-            }
-        } else if [request] =~ "/static/" or [request] =~ "favicon.ico" {
-            mutate {
-                add_field => { "url_group" => "static" }
-            }
-        } else if [request] =~ "^/a/[0-9a-z-]+" {
-            mutate {
-                split => ["request", "/"]
-            }
-            if "phone" in [request] {
-                mutate {
-                    add_field => { "url_group" => "%{[request][3]}/%{[request][4]}" }
-                }
-            } else {
-                mutate {
-                    add_field => { "url_group" => "%{[request][3]}" }
-                }
-                alter {
-                    coalesce => [
-                        "url_group", "%{url_group}", "other"
-                    ]
-                }
-            }
-        } else {
-            mutate {
-                add_field => { "url_group" => "other" }
-            }
-        }
+        {{ url_group('request', 'url_group') }}
+        {{ url_group('referer', 'referer_group') }}
 
         # Cleanup
         mutate {
-            remove_field => [ "request", "bytes", "httpversion", "message" ]
+            remove_field => [ "request", "bytes", "httpversion", "message", "referer" ]
         }
 
     }
@@ -170,8 +179,9 @@ filter {
 
     }
 
-
+    {%- if drop_grokparsefailure -%}
     if "_grokparsefailure" in [tags] {
         drop { }
     }
+{% endif %}
 }

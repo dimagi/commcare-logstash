@@ -24,7 +24,8 @@
           "url_group": "formplayer",
           "domain": "",
           "apdex": 1,
-          "tags": []
+          "tags": [],
+          "referer_group": ""
         }
       ]
     }
