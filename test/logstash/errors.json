@@ -1,0 +1,69 @@
+{
+    "codec": "line",
+    "fields": {
+      "type": "nginx-error"
+    },
+    "ignore": [
+      "host"
+    ],
+    "testcases": [
+      {
+        "description": " General Error",
+        "input": [
+            "2020/01/29 08:18:05 [error] 110579#110579: *23672990 limiting requests, excess: 50.090 by zone \"app_downloads\", client: 223.188.118.33, server: cas.commcarehq.org, request: \"GET /a/icds-cas/apps/download/66d132d12f1e4c16a12870b0746e06ac/media_profile.ccpr?latest=true&profile=ce8ef933c7754fdcaabfa8a469b7e1b9&username=08130080411 HTTP/2.0\", host: \"cas.commcarehq.org\""
+        ],
+        "expected": [
+          {
+            "type": "nginx-error",
+            "@timestamp": "2020-01-29T08:18:05.000Z",
+            "http_timestamp": "2020/01/29 08:18:05",
+            "verb": "GET",
+            "err_severity": "error",
+            "err_message": "others",
+            "domain": "icds-cas",
+            "clientip": "223.188.118.33",
+            "server": "cas.commcarehq.org"
+          }
+        ]
+      },
+      {
+        "description": "Error Client",
+        "input": [
+            "2020/01/24 02:07:30 [warn] 130865#130865: *28437698 a client request body is buffered to a temporary file /var/cache/nginx/client_temp/0006209677, client: 157.42.120.30, server: www.icds-cas.gov.in, request: \"POST /a/icds-cas/login/ HTTP/2.0\", host: \"www.icds-cas.gov.in\", referrer: \"https://www.icds-cas.gov.in/a/icds-cas/login/\""
+        ],
+        "expected": [
+          {
+            "type": "nginx-error",
+            "@timestamp": "2020-01-24T02:07:30.000Z",
+            "http_timestamp": "2020/01/24 02:07:30",
+            "verb": "POST",
+            "err_severity": "warn",
+            "err_message": "buffer_to_file/client",
+            "domain": "icds-cas",
+            "server": "www.icds-cas.gov.in",
+            "clientip": "157.42.120.30"
+          }
+        ]
+      },
+      {
+        "description": "Error Upstream",
+        "input": [
+            "2020/01/24 02:25:42 [warn] 130865#130865: *28499547 an upstream response is buffered to a temporary file /var/cache/nginx/proxy_temp/6/67/0006228676 while reading upstream, client: 47.9.208.111, server: www.icds-cas.gov.in, request: \"GET /a/icds-cas/cloudcare/apps/v2/ HTTP/2.0\", upstream: \"http://100.71.188.205:9010/a/icds-cas/cloudcare/apps/v2/\", host: \"www.icds-cas.gov.in\""
+        ],
+        "expected": [
+          {
+            "type": "nginx-error",
+            "@timestamp": "2020-01-24T02:25:42.000Z",
+            "http_timestamp": "2020/01/24 02:25:42",
+            "verb": "GET",
+            "err_severity": "warn",
+            "err_message": "buffer_to_file/upstream",
+            "domain": "icds-cas",
+            "server": "www.icds-cas.gov.in",
+            "clientip": "47.9.208.111",
+            "upstream": "http://100.71.188.205:9010/a/icds-cas/cloudcare/apps/v2/"
+          }
+        ]
+      }
+    ]
+}
