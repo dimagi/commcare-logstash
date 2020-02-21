@@ -1,0 +1,272 @@
+{
+  "codec": "line",
+  "fields": {
+    "type": "nginx-timing"
+  },
+  "ignore": [
+    "host"
+  ],
+  "testcases": [
+    {
+      "description": "url_group:formplayer",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /formplayer/next_question HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "formplayer",
+          "domain": "",
+          "apdex": 1,
+          "tags": [],
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:other (not domain)",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/admin HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "other",
+          "domain": "",
+          "apdex": 1,
+          "tags": [],
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:other (domain)",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "other",
+          "domain": "uth-rhd",
+          "apdex": 1,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:mm/audio",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareAudio/123456/some-audio.mp3 HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "mm/audio",
+          "domain": "",
+          "tags": [],
+          "apdex": 1,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:mm/image",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareImage/123456/module4_form0_en.png HTTP/1.1 401 2.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 2.2,
+          "status_code": "401",
+          "url_group": "mm/image",
+          "domain": "",
+          "tags": [],
+          "apdex": 1,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:mm/other",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/other/123456/vid_daily_feeding.mp4 HTTP/1.1 200 3.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 3.2,
+          "status_code": "200",
+          "url_group": "mm/other",
+          "domain": "",
+          "tags": [],
+          "apdex": 0.5,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:mm/video",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareVideo/123456/vid_daily_feeding.mp4 HTTP/1.1 200 3.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 3.2,
+          "status_code": "200",
+          "url_group": "mm/video",
+          "domain": "",
+          "tags": [],
+          "apdex": 0.5,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:home",
+      "input": [
+        "[01/Feb/2015:20:14:43 +0000] - GET /home/ HTTP/1.1 200 18.067"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-02-01T20:14:43.000Z",
+          "http_timestamp": "01/Feb/2015:20:14:43 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 18.067,
+          "status_code": "200",
+          "url_group": "home",
+          "tags": [],
+          "domain": "",
+          "apdex": 0,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:pricing",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /pricing/ HTTP/1.1 200 0.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 0.2,
+          "status_code": "200",
+          "url_group": "pricing",
+          "tags": [],
+          "domain": "",
+          "apdex": 1,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:static (favicon)",
+      "input": [
+        "[01/Jan/2015:15:18:14 +0000] - GET /favicon.ico HTTP/1.1 401 0.242"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-01-01T15:18:14.000Z",
+          "http_timestamp": "01/Jan/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 0.242,
+          "status_code": "401",
+          "url_group": "static",
+          "domain": "",
+          "tags": [],
+          "apdex": 1,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:api",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/api/case/attachment/123/VH016.MP4 HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "api",
+          "domain": "uth-rhd",
+          "apdex": 1,
+          "referer_group": ""
+        }
+      ]
+    },
+    {
+      "description": "url_group:phone/heartbeat",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/phone/heartbeat/123456 HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "phone/heartbeat",
+          "domain": "uth-rhd",
+          "apdex": 1,
+          "referer_group": ""
+        }
+      ]
+    }
+  ]
+}
