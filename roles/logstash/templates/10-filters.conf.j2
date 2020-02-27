@@ -178,10 +178,4 @@ filter {
         }
 
     }
-
-    {%- if drop_grokparsefailure -%}
-    if "_grokparsefailure" in [tags] {
-        drop { }
-    }
-{% endif %}
 }
