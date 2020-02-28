@@ -36,6 +36,4 @@
         name: sansible.logstash
     - import_role: 
         name: logstash
-      vars:
-        drop_grokparsefailure: no  # helps with debugging
   tags: logstash
