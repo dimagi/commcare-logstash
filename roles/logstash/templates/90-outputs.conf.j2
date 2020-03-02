@@ -51,7 +51,7 @@ output {
         host => "{{ datadog_statsd_host|default('localhost') }}"
         port => {{ datadog_statsd_port|default(8125) }}
         codec => plain {
-            format => "nginx.request_zone:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{verb},zone:%{zone},group:proxy"
+            format => "nginx.rate_limiting:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{verb},zone:%{zone},group:proxy"
         }
         id => "logstash-nginx-error_zones"
       }
