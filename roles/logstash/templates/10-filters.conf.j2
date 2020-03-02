@@ -166,12 +166,25 @@ filter {
                 replace => { "[err_message]" => "connection_refused" }
             } 
         }
+        # Filter zone being hit 
+        else if [err_message] =~ "limiting requests"{
+            grok{
+                match => {"err_message" => ".*\"(?<zone>[a-z_]+)\""}
+                tag_on_failure => ["_zoneparsefailuer"]
+            }
+        }     
         else{
             mutate{
                 replace => { "[err_message]" => "others" }
             } 
         }
-
+        
+        if "_zoneparsefailuer" in [tags] {
+            mutate {
+                add_field => { "zone" => "" }
+                remove_tag => [ "_zoneparsefailuer" ]
+            }
+        }
         # Cleanup
         mutate {
             remove_field => [ "request", "bytes", "httpversion", "message", "pid", "referrer" ]
