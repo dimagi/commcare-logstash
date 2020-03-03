@@ -42,10 +42,21 @@ output {
         host => "{{ datadog_statsd_host|default('localhost') }}"
         port => {{ datadog_statsd_port|default(8125) }}
         codec => plain {
-            format => "nginx.error_logs:1.0|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},log_level:%{err_severity},error_type:%{err_message},group:proxy"
+            format => "nginx.error_logs:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{verb},log_level:%{err_severity},error_type:%{err_message},group:proxy"
         }
         id => "logstash-nginx-error_logs"
       }
-    }
-  }
+    if [zone] {
+      udp {
+          host => "{{ datadog_statsd_host|default('localhost') }}"
+          port => {{ datadog_statsd_port|default(8125) }}
+          codec => plain {
+              format => "nginx.rate_limiting:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{verb},zone:%{zone},group:proxy"
+          }
+          id => "logstash-nginx-error_zones"
+        }
+
+      }
+     }
+   }
 }
