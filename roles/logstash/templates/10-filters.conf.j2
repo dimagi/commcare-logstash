@@ -72,7 +72,7 @@ filter {
     if [type] == "nginx-timing" {
         grok {
             match => [
-                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:request} HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time}( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
+                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:uri_path}(\?%{GREEDYDATA:uri_query})? HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time}( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
             ]
         }
         # Add domain
@@ -117,12 +117,12 @@ filter {
         }
 
         # Parse url_group
-        {{ url_group('request', 'url_group') }}
+        {{ url_group('uri_path', 'url_group') }}
         {{ url_group('referer', 'referer_group') }}
 
         # Cleanup
         mutate {
-            remove_field => [ "request", "bytes", "httpversion", "message", "referer" ]
+            remove_field => [ "uri_path", "uri_query", "bytes", "httpversion", "message", "referer" ]
         }
 
     }
