@@ -267,6 +267,27 @@
           "referer_group": ""
         }
       ]
+    },
+    {
+      "description": "url_group:query params",
+      "input": [
+        "[29/Feb/2020:17:17:39 +0000] - GET /a/icds-cas/locations?location_id=45468445b39b4dc5a91fce9e7a611bb2 HTTP/2.0 200 0.128 https://www.icds-cas.gov.in/a/icds-cas/icds_dashboard/"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2020-02-29T17:17:39.000Z",
+          "http_timestamp": "29/Feb/2020:17:17:39 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 0.128,
+          "status_code": "200",
+          "url_group": "locations",
+          "domain": "icds-cas",
+          "apdex": 1,
+          "referer_group": "icds_dashboard"
+        }
+      ]
     }
   ]
 }
