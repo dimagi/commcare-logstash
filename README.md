@@ -28,6 +28,14 @@ Requirements:
     $ sudo /tmp/kitchen/test/test.sh 
     ```
 
+## Build & Release
+
+1. Run following command in project root folder
+   ```
+   ansible-galaxy collection build
+   ```
+2. Upload the created zip file to github release
+
 ## References
 
 * [Grok patterns](https://github.com/logstash-plugins/logstash-patterns-core/blob/master/patterns/grok-patterns)

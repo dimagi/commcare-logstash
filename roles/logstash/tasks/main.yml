@@ -10,3 +10,9 @@
     - 90-outputs.conf
   notify:
     - restart logstash
+  
+- sysctl:
+    name: net.core.rmem_max
+    value: '26214400'
+    state: present
+
