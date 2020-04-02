@@ -36,13 +36,26 @@ output {
         id => "logstash-nginx-apdex"
       }
 
-      udp {
-        host => "{{ datadog_statsd_host|default('localhost') }}"
-        port => {{ datadog_statsd_port|default(8125) }}
-        codec => plain {
-            format => "nginx.bytes_total:%{bytes_total}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},group:proxy"
+      if [request_length] {
+        udp {
+          host => "{{ datadog_statsd_host|default('localhost') }}"
+          port => {{ datadog_statsd_port|default(8125) }}
+          codec => plain {
+              format => "nginx.request_length:%{request_length}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},group:proxy"
+          }
+          id => "logstash-nginx-request_length"
         }
-        id => "logstash-nginx-bytes_total"
+      }
+
+      if [body_sent] {
+        udp {
+          host => "{{ datadog_statsd_host|default('localhost') }}"
+          port => {{ datadog_statsd_port|default(8125) }}
+          codec => plain {
+              format => "nginx.body_sent:%{body_sent}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},group:proxy"
+          }
+          id => "logstash-nginx-body_sent"
+        }
       }
     }
 

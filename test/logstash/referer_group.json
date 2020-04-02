@@ -25,7 +25,8 @@
           "domain": "anydomain",
           "apdex": 1,
           "referer_group": "icds_dashboard",
-	        "bytes_total": 671
+          "request_length": 216,
+          "body_sent": 455
         }
       ]
     }

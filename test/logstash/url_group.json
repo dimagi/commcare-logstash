@@ -10,7 +10,7 @@
     {
       "description": "url_group:formplayer",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /formplayer/next_question HTTP/1.1 200 1.2 27 4104"
+        "[28/Oct/2015:15:18:14 +0000] - GET /formplayer/next_question HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -25,15 +25,14 @@
           "domain": "",
           "apdex": 1,
           "tags": [],
-          "referer_group": "",
-          "bytes_total": 4131
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:other (not domain)",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /hq/admin HTTP/1.1 200 1.2 27 2104"
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/admin HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -48,15 +47,14 @@
           "domain": "",
           "apdex": 1,
           "tags": [],
-          "referer_group": "",
-          "bytes_total": 2131
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:other (domain)",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd HTTP/1.1 200 1.2 63 6104"
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -70,15 +68,14 @@
           "url_group": "other",
           "domain": "uth-rhd",
           "apdex": 1,
-          "referer_group": "",
-          "bytes_total": 6167
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:mm/audio",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareAudio/123456/some-audio.mp3 HTTP/1.1 200 1.2 48 90805"
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareAudio/123456/some-audio.mp3 HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -93,15 +90,14 @@
           "domain": "",
           "tags": [],
           "apdex": 1,
-          "referer_group": "",
-          "bytes_total": 90853
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:mm/image",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareImage/123456/module4_form0_en.png HTTP/1.1 401 2.2 232 70805"
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareImage/123456/module4_form0_en.png HTTP/1.1 401 2.2"
       ],
       "expected": [
         {
@@ -116,15 +112,14 @@
           "domain": "",
           "tags": [],
           "apdex": 1,
-          "referer_group": "",
-          "bytes_total": 71037
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:mm/other",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/other/123456/vid_daily_feeding.mp4 HTTP/1.1 200 3.2 234 904553"
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/other/123456/vid_daily_feeding.mp4 HTTP/1.1 200 3.2"
       ],
       "expected": [
         {
@@ -139,15 +134,14 @@
           "domain": "",
           "tags": [],
           "apdex": 0.5,
-          "referer_group": "",
-          "bytes_total": 904787
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:mm/video",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareVideo/123456/vid_daily_feeding.mp4 HTTP/1.1 200 3.2 48 90805"
+        "[28/Oct/2015:15:18:14 +0000] - GET /hq/multimedia/file/CommCareVideo/123456/vid_daily_feeding.mp4 HTTP/1.1 200 3.2"
       ],
       "expected": [
         {
@@ -162,15 +156,14 @@
           "domain": "",
           "tags": [],
           "apdex": 0.5,
-          "referer_group": "",
-          "bytes_total": 90853
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:home",
       "input": [
-        "[01/Feb/2015:20:14:43 +0000] - GET /home/ HTTP/1.1 200 18.067 50 2262"
+        "[01/Feb/2015:20:14:43 +0000] - GET /home/ HTTP/1.1 200 18.067"
       ],
       "expected": [
         {
@@ -185,15 +178,14 @@
           "tags": [],
           "domain": "",
           "apdex": 0,
-          "referer_group": "",
-          "bytes_total": 2312
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:pricing",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /pricing/ HTTP/1.1 200 0.2 80 3421"
+        "[28/Oct/2015:15:18:14 +0000] - GET /pricing/ HTTP/1.1 200 0.2"
       ],
       "expected": [
         {
@@ -208,15 +200,14 @@
           "tags": [],
           "domain": "",
           "apdex": 1,
-          "referer_group": "",
-          "bytes_total": 3501
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:static (favicon)",
       "input": [
-        "[01/Jan/2015:15:18:14 +0000] - GET /favicon.ico HTTP/1.1 401 0.242 200 4352"
+        "[01/Jan/2015:15:18:14 +0000] - GET /favicon.ico HTTP/1.1 401 0.242"
       ],
       "expected": [
         {
@@ -231,15 +222,14 @@
           "domain": "",
           "tags": [],
           "apdex": 1,
-          "referer_group": "",
-          "bytes_total": 4552
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:api",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/api/case/attachment/123/VH016.MP4 HTTP/1.1 200 1.2 676 224362"
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/api/case/attachment/123/VH016.MP4 HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -253,15 +243,14 @@
           "url_group": "api",
           "domain": "uth-rhd",
           "apdex": 1,
-          "referer_group": "",
-          "bytes_total": 225038
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:phone/heartbeat",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/phone/heartbeat/123456 HTTP/1.1 200 1.2 48 225038"
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/phone/heartbeat/123456 HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -275,15 +264,14 @@
           "url_group": "phone/heartbeat",
           "domain": "uth-rhd",
           "apdex": 1,
-          "referer_group": "",
-          "bytes_total": 225086
+          "referer_group": ""
         }
       ]
     },
     {
       "description": "url_group:query params",
       "input": [
-        "[29/Feb/2020:17:17:39 +0000] - GET /a/icds-cas/locations?location_id=45468445b39b4dc5a91fce9e7a611bb2 HTTP/2.0 200 0.128 345 9786 https://www.icds-cas.gov.in/a/icds-cas/icds_dashboard/"
+        "[29/Feb/2020:17:17:39 +0000] - GET /a/icds-cas/locations?location_id=45468445b39b4dc5a91fce9e7a611bb2 HTTP/2.0 200 0.128 https://www.icds-cas.gov.in/a/icds-cas/icds_dashboard/"
       ],
       "expected": [
         {
@@ -297,8 +285,7 @@
           "url_group": "locations",
           "domain": "icds-cas",
           "apdex": 1,
-          "referer_group": "icds_dashboard",
-          "bytes_total": 10131
+          "referer_group": "icds_dashboard"
         }
       ]
     }

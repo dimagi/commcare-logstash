@@ -72,7 +72,7 @@ filter {
     if [type] == "nginx-timing" {
         grok {
             match => [
-                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:uri_path}(\?%{GREEDYDATA:uri_query})? HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time} %{NUMBER:request_length} %{NUMBER:body_sent}( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
+                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:uri_path}(\?%{GREEDYDATA:uri_query})? HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time} (%{NUMBER:request_length})? (%{NUMBER:body_sent})?( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
             ]
         }
         # Add domain
@@ -117,14 +117,11 @@ filter {
         }
 
         # Calculate Bandwidth
-        mutate{
-             convert => { "request_length" => "integer" }
-             convert => { "body_sent" => "integer" }
-        }
-        ruby{
-            code =>
-                "bytes_total = event.get('request_length') + event.get('body_sent');
-                 event.set('bytes_total',bytes_total)"
+        if [request_length] and [body_sent] {
+            mutate{
+                convert => { "request_length" => "integer" }
+                convert => { "body_sent" => "integer" }
+            }
         }
  
         # Parse url_group
@@ -133,7 +130,7 @@ filter {
 
         # Cleanup
         mutate {
-            remove_field => [ "uri_path", "uri_query", "bytes", "httpversion", "message", "referer", "request_length", "body_sent" ]
+            remove_field => [ "uri_path", "uri_query", "bytes", "httpversion", "message", "referer" ]
         }
 
     }

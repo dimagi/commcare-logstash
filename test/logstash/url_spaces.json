@@ -25,7 +25,8 @@
           "domain": "infomovel-ccs",
           "apdex": 1,
           "referer_group": "",
-          "bytes_total": 538672
+          "request_length": 61,
+          "body_sent": 538611
         }
       ]
     }
