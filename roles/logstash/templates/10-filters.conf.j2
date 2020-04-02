@@ -72,7 +72,7 @@ filter {
     if [type] == "nginx-timing" {
         grok {
             match => [
-                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:uri_path}(\?%{GREEDYDATA:uri_query})? HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time} (%{NUMBER:request_length})? (%{NUMBER:body_sent})?( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
+                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:uri_path}(\?%{GREEDYDATA:uri_query})? HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time}( %{NUMBER:request_length})?( %{NUMBER:bytes_sent})?( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
             ]
         }
         # Add domain
