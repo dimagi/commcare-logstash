@@ -52,7 +52,7 @@ output {
           host => "{{ datadog_statsd_host|default('localhost') }}"
           port => {{ datadog_statsd_port|default(8125) }}
           codec => plain {
-              format => "nginx.body_sent:%{body_sent}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},group:proxy"
+              format => "nginx.bytes_sent:%{bytes_sent}|g|#environment:{{ env_monitoring_id }},url_group:%{url_group}"
           }
           id => "logstash-nginx-body_sent"
         }
