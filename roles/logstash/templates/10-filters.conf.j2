@@ -120,7 +120,7 @@ filter {
         if [request_length] and [body_sent] {
             mutate{
                 convert => { "request_length" => "integer" }
-                convert => { "body_sent" => "integer" }
+                convert => { "bytes_sent" => "integer" }
             }
         }
  
