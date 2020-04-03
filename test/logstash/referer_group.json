@@ -10,7 +10,7 @@
     {
       "description": "api",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /a/anydomain/icds_dashboard/anything HTTP/1.1 401 0.242 https://www.icds-cas.gov.in/a/icds-cas/icds_dashboard/"
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/anydomain/icds_dashboard/anything HTTP/1.1 401 0.242 216 455 https://www.icds-cas.gov.in/a/icds-cas/icds_dashboard/"
       ],
       "expected": [
         {
@@ -24,7 +24,9 @@
           "url_group": "icds_dashboard",
           "domain": "anydomain",
           "apdex": 1,
-          "referer_group": "icds_dashboard"
+          "referer_group": "icds_dashboard",
+          "request_length": 216,
+          "bytes_sent": 455
         }
       ]
     }

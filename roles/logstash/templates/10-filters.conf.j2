@@ -72,7 +72,7 @@ filter {
     if [type] == "nginx-timing" {
         grok {
             match => [
-                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:uri_path}(\?%{GREEDYDATA:uri_query})? HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time}( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
+                "message", "\[%{HTTPDATE:http_timestamp}\] (?<cache_status>[-\w]+) %{WORD:http_method} %{DATA:uri_path}(\?%{GREEDYDATA:uri_query})? HTTP/%{NUMBER:httpversion} %{NUMBER:status_code} %{NUMBER:request_time}( %{NUMBER:request_length})?( %{NUMBER:bytes_sent})?( %{URIPROTO}://(?:%{URIHOST})?(?:%{URIPATHPARAM:referer})?)?"
             ]
         }
         # Add domain
@@ -116,6 +116,14 @@ filter {
             convert => { "apdex" => "float" }
         }
 
+        # Calculate Bandwidth
+        if [request_length] and [bytes_sent] {
+            mutate{
+                convert => { "request_length" => "integer" }
+                convert => { "bytes_sent" => "integer" }
+            }
+        }
+ 
         # Parse url_group
         {{ url_group('uri_path', 'url_group') }}
         {{ url_group('referer', 'referer_group') }}

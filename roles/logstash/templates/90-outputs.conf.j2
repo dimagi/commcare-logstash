@@ -35,6 +35,28 @@ output {
         }
         id => "logstash-nginx-apdex"
       }
+
+      if [request_length] {
+        udp {
+          host => "{{ datadog_statsd_host|default('localhost') }}"
+          port => {{ datadog_statsd_port|default(8125) }}
+          codec => plain {
+              format => "nginx.bytes_received:%{request_length}|g|#environment:{{ env_monitoring_id }},url_group:%{url_group}"
+          }
+          id => "logstash-nginx-request_length"
+        }
+      }
+
+      if [body_sent] {
+        udp {
+          host => "{{ datadog_statsd_host|default('localhost') }}"
+          port => {{ datadog_statsd_port|default(8125) }}
+          codec => plain {
+              format => "nginx.bytes_sent:%{bytes_sent}|g|#environment:{{ env_monitoring_id }},url_group:%{url_group}"
+          }
+          id => "logstash-nginx-body_sent"
+        }
+      }
     }
 
     if [type] == "nginx-error" {
