@@ -117,7 +117,7 @@ filter {
         }
 
         # Calculate Bandwidth
-        if [request_length] and [body_sent] {
+        if [request_length] and [bytes_sent] {
             mutate{
                 convert => { "request_length" => "integer" }
                 convert => { "bytes_sent" => "integer" }
