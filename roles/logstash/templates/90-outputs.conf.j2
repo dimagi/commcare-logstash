@@ -47,7 +47,7 @@ output {
         }
       }
 
-      if [body_sent] {
+      if [bytes_sent] {
         udp {
           host => "{{ datadog_statsd_host|default('localhost') }}"
           port => {{ datadog_statsd_port|default(8125) }}
