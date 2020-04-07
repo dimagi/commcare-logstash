@@ -27,6 +27,13 @@ Requirements:
     kitchen login
     $ sudo /tmp/kitchen/test/test.sh 
     ```
+## Build & Release
+1. Build the collection with ansible-galaxy command from project root folder
+   ```
+   ansible-galaxy collection build
+   ```
+
+2. Upload the generated zip file when doing a github release
 
 ## References
 
