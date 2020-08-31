@@ -14,7 +14,7 @@ output {
         host => "{{ prometheus_statsd_host|default('localhost') }}"
         port => {{ statsd_exporter_listen_udp|default(9125) }}
         codec => plain {
-            format => "nginx_timings:%{request_time}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},,group:proxy,referer_group:%{referer_group}"
+            format => "nginx_timings:%{request_time}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},group:proxy,referer_group:%{referer_group}"
         }
         id => "logstash-nginx-timings"
       }
@@ -91,7 +91,7 @@ output {
         host => "{{ datadog_statsd_host|default('localhost') }}"
         port => {{ datadog_statsd_port|default(8125) }}
         codec => plain {
-            format => "nginx.timings:%{request_time}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},,group:proxy,referer_group:%{referer_group}"
+            format => "nginx.timings:%{request_time}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},group:proxy,referer_group:%{referer_group}"
         }
         id => "logstash-nginx-timings"
       }
