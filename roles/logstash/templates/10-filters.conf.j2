@@ -5,7 +5,7 @@
 {%- macro url_group(input_field, output_field) -%}
         if ![{{ input_field}}] {
             mutate {
-                add_field => { "{{ output_field }}" => "" }
+                add_field => { "{{ output_field }}" => "NA" }
             }
         } else if [{{ input_field }}] =~ "/hq/multimedia/file/CommCareAudio" {
             mutate {
@@ -82,7 +82,7 @@ filter {
         }
         if "_domainparsefailure" in [tags] {
             mutate {
-                add_field => { "domain" => "" }
+                add_field => { "domain" => "NA" }
                 remove_tag => [ "_domainparsefailure" ]
             }
         }
@@ -148,7 +148,7 @@ filter {
         }
         if "_domainparsefailure" in [tags] {
             mutate {
-                add_field => { "domain" => "" }
+                add_field => { "domain" => "NA" }
                 remove_tag => [ "_domainparsefailure" ]
             }
         }
@@ -189,7 +189,7 @@ filter {
         
         if "_zoneparsefailuer" in [tags] {
             mutate {
-                add_field => { "zone" => "" }
+                add_field => { "zone" => "NA" }
                 remove_tag => [ "_zoneparsefailuer" ]
             }
         }
