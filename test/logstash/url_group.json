@@ -22,10 +22,10 @@
           "request_time": 1.2,
           "status_code": "200",
           "url_group": "formplayer",
-          "domain": "",
+          "domain": "NA",
           "apdex": 1,
           "tags": [],
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -44,10 +44,10 @@
           "request_time": 1.2,
           "status_code": "200",
           "url_group": "other",
-          "domain": "",
+          "domain": "NA",
           "apdex": 1,
           "tags": [],
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -68,7 +68,7 @@
           "url_group": "other",
           "domain": "uth-rhd",
           "apdex": 1,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -87,10 +87,10 @@
           "request_time": 1.2,
           "status_code": "200",
           "url_group": "mm/audio",
-          "domain": "",
+          "domain": "NA",
           "tags": [],
           "apdex": 1,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -109,10 +109,10 @@
           "request_time": 2.2,
           "status_code": "401",
           "url_group": "mm/image",
-          "domain": "",
+          "domain": "NA",
           "tags": [],
           "apdex": 1,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -131,10 +131,10 @@
           "request_time": 3.2,
           "status_code": "200",
           "url_group": "mm/other",
-          "domain": "",
+          "domain": "NA",
           "tags": [],
           "apdex": 0.5,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -153,10 +153,10 @@
           "request_time": 3.2,
           "status_code": "200",
           "url_group": "mm/video",
-          "domain": "",
+          "domain": "NA",
           "tags": [],
           "apdex": 0.5,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -176,9 +176,9 @@
           "status_code": "200",
           "url_group": "home",
           "tags": [],
-          "domain": "",
+          "domain": "NA",
           "apdex": 0,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -198,9 +198,9 @@
           "status_code": "200",
           "url_group": "pricing",
           "tags": [],
-          "domain": "",
+          "domain": "NA",
           "apdex": 1,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -219,10 +219,10 @@
           "request_time": 0.242,
           "status_code": "401",
           "url_group": "static",
-          "domain": "",
+          "domain": "NA",
           "tags": [],
           "apdex": 1,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -243,7 +243,7 @@
           "url_group": "api",
           "domain": "uth-rhd",
           "apdex": 1,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },
@@ -264,7 +264,7 @@
           "url_group": "phone/heartbeat",
           "domain": "uth-rhd",
           "apdex": 1,
-          "referer_group": ""
+          "referer_group": "NA"
         }
       ]
     },

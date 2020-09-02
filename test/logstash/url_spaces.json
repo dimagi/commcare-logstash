@@ -24,7 +24,7 @@
           "url_group": "apps",
           "domain": "infomovel-ccs",
           "apdex": 1,
-          "referer_group": "",
+          "referer_group": "NA",
           "request_length": 61,
           "bytes_sent": 538611
         }
