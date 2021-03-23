@@ -49,7 +49,20 @@
             }
             if "phone" in [{{ input_field }}] {
                 mutate {
+                    # phone/<endpoint>
                     add_field => { "{{ output_field }}" => "%{[{{ input_field }}][3]}/%{[{{ input_field }}][4]}" }
+                }
+            } else if "api" in [{{ input_field }}] {
+                if "odata" in [{{ input_field }}] {
+                    mutate {
+                        # api/<version>/odata/<endpoint>
+                        add_field => { "{{ output_field }}" => "%{[{{ input_field }}][3]}/%{[{{ input_field }}][4]}/%{[{{ input_field }}][5]}/%{[{{ input_field }}][6]}" }
+                    }
+                } else {
+                    mutate {
+                        # api/<version>/<endpoint>
+                        add_field => { "{{ output_field }}" => "%{[{{ input_field }}][3]}/%{[{{ input_field }}][4]}/%{[{{ input_field }}][5]}" }
+                    }
                 }
             } else {
                 mutate {
