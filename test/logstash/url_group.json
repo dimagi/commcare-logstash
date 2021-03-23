@@ -54,7 +54,7 @@
     {
       "description": "url_group:other (domain)",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd HTTP/1.1 200 1.2"
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/domain1 HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -66,7 +66,7 @@
           "request_time": 1.2,
           "status_code": "200",
           "url_group": "other",
-          "domain": "uth-rhd",
+          "domain": "domain1",
           "apdex": 1,
           "referer_group": "NA"
         }
@@ -229,7 +229,7 @@
     {
       "description": "url_group:api",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/api/case/attachment/123/VH016.MP4 HTTP/1.1 200 1.2"
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/domain1/api/case/attachment/123/VH016.MP4 HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -241,7 +241,7 @@
           "request_time": 1.2,
           "status_code": "200",
           "url_group": "api",
-          "domain": "uth-rhd",
+          "domain": "domain1",
           "apdex": 1,
           "referer_group": "NA"
         }
@@ -250,7 +250,7 @@
     {
       "description": "url_group:phone/heartbeat",
       "input": [
-        "[28/Oct/2015:15:18:14 +0000] - GET /a/uth-rhd/phone/heartbeat/123456 HTTP/1.1 200 1.2"
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/domain1/phone/heartbeat/123456 HTTP/1.1 200 1.2"
       ],
       "expected": [
         {
@@ -262,7 +262,7 @@
           "request_time": 1.2,
           "status_code": "200",
           "url_group": "phone/heartbeat",
-          "domain": "uth-rhd",
+          "domain": "domain1",
           "apdex": 1,
           "referer_group": "NA"
         }
@@ -271,7 +271,7 @@
     {
       "description": "url_group:query params",
       "input": [
-        "[29/Feb/2020:17:17:39 +0000] - GET /a/icds-cas/locations?location_id=45468445b39b4dc5a91fce9e7a611bb2 HTTP/2.0 200 0.128 https://www.icds-cas.gov.in/a/icds-cas/icds_dashboard/"
+        "[29/Feb/2020:17:17:39 +0000] - GET /a/domain2/locations?location_id=45468445b39b4dc5a91fce9e7a611bb2 HTTP/2.0 200 0.128 https://www.domain2.gov.in/a/domain2/icds_dashboard/"
       ],
       "expected": [
         {
@@ -283,7 +283,7 @@
           "request_time": 0.128,
           "status_code": "200",
           "url_group": "locations",
-          "domain": "icds-cas",
+          "domain": "domain2",
           "apdex": 1,
           "referer_group": "icds_dashboard"
         }
