@@ -1,0 +1,95 @@
+{
+  "codec": "line",
+  "fields": {
+    "type": "nginx-timing"
+  },
+  "ignore": [
+    "host"
+  ],
+  "testcases": [
+    {
+      "description": "url_group:api/case/attachment",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/domain1/api/case/attachment/123/VH016.MP4 HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "api/case/attachment",
+          "domain": "domain1",
+          "apdex": 1,
+          "referer_group": "NA"
+        }
+      ]
+    },
+    {
+      "description": "url_group:api/v0.5/case",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/domain1/api/v0.5/case/12345 HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "api/v0.5/case",
+          "domain": "domain1",
+          "apdex": 1,
+          "referer_group": "NA"
+        }
+      ]
+    },
+    {
+      "description": "url_group:api/v0.5/form",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/domain1/api/v0.5/form?xmlns=http://commcare.org/formdesigner/BAE25960 HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "api/v0.5/form",
+          "domain": "domain1",
+          "apdex": 1,
+          "referer_group": "NA"
+        }
+      ]
+    },
+    {
+      "description": "url_group:api/v0.5/odata/cases",
+      "input": [
+        "[28/Oct/2015:15:18:14 +0000] - GET /a/domain1/api/v0.5/odata/cases?type=a HTTP/1.1 200 1.2"
+      ],
+      "expected": [
+        {
+          "type": "nginx-timing",
+          "@timestamp": "2015-10-28T15:18:14.000Z",
+          "http_timestamp": "28/Oct/2015:15:18:14 +0000",
+          "cache_status": "-",
+          "http_method": "GET",
+          "request_time": 1.2,
+          "status_code": "200",
+          "url_group": "api/v0.5/odata/cases",
+          "domain": "domain1",
+          "apdex": 1,
+          "referer_group": "NA"
+        }
+      ]
+    }
+  ]
+}

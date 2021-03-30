@@ -10,23 +10,31 @@ Requirements:
 
 2. Run the tests
 
+    ```python
+    kitchen test
     ```
-    kitchen converge
-    kitchen verify
-    ```
-
+   
     You can also run tests manually:
 
     ```
+    kitchen create
+    kitchen converge
+    kitchen verify
     kitchen exec -c 'sudo /tmp/kitchen/test/test.sh'
     ```
-   
+
     OR
    
-    ``` 
+    ```
+    kitchen create
+    kitchen converge
     kitchen login
     $ sudo /tmp/kitchen/test/test.sh 
     ```
+
+    After each change you will need to run `kitchen converge` again before re-running the
+    test command.
+
 ## Build & Release
 1. Build the collection with ansible-galaxy command from project root folder
    ```
