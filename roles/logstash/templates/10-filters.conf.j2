@@ -108,6 +108,10 @@ filter {
         mutate {
             convert => { "request_time" => "float" }
         }
+        # Parse status_code
+        mutate {
+            convert => { "status_code" => "integer" }
+        }
 
         # Set apdex
         if [request_time] {
