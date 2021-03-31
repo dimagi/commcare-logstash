@@ -133,6 +133,26 @@ filter {
             convert => { "apdex" => "float" }
         }
 
+        # Set apdex_new
+        if [request_time] and [status_code] {
+            if [request_time] > 20 or [status_code] >= 500 {
+                mutate {
+                    add_field => { "apdex_new" => 0 }
+                }
+            } else if [request_time] > 4 {
+                mutate {
+                    add_field => { "apdex_new" => 0.5 }
+                }
+            } else {
+                mutate {
+                    add_field => { "apdex_new" => 1 }
+                }
+            }
+        }
+        mutate {
+            convert => { "apdex_new" => "float" }
+        }
+
         # Calculate Bandwidth
         if [request_length] and [bytes_sent] {
             mutate{

@@ -114,6 +114,16 @@ output {
         id => "logstash-nginx-apdex"
       }
 
+      udp {
+        host => "localhost"
+        port => 8125
+        codec => plain {
+            format => "nginx.apdex_new:%{apdex_new}|g|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},group:proxy"
+        }
+        id => "logstash-nginx-apdex_new"
+       }
+
+
       if [request_length] {
         udp {
           host => "{{ datadog_statsd_host|default('localhost') }}"
