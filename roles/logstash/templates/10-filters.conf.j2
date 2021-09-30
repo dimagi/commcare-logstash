@@ -129,6 +129,31 @@ filter {
             convert => { "apdex" => "float" }
         }
 
+        # Set duration
+        if [request_time] {
+            if [request_time] < 1 {
+                mutate {
+                    add_field => { "duration" => "lt_001s" }
+                }
+            } else if [request_time] < 5 {
+                mutate {
+                    add_field => { "duration" => "lt_005s" }
+                }
+            } else if [request_time] < 20 {
+                mutate {
+                    add_field => { "duration" => "lt_020s" }
+                }
+            } else if [request_time] < 120 {
+                mutate {
+                    add_field => { "duration" => "lt_120s" }
+                }                
+            } else {
+                mutate {
+                    add_field => { "duration" => "over_120s" }
+                }
+            }
+        }
+
         # Calculate Bandwidth
         if [request_length] and [bytes_sent] {
             mutate{
