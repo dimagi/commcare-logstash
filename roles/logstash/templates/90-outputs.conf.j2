@@ -100,7 +100,7 @@ output {
         host => "{{ datadog_statsd_host|default('localhost') }}"
         port => {{ datadog_statsd_port|default(8125) }}
         codec => plain {
-            format => "nginx.requests:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},cache_status:%{cache_status},group:proxy,referer_group:%{referer_group}"
+            format => "nginx.requests:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},cache_status:%{cache_status},group:proxy,referer_group:%{referer_group},duration:%{duration}"
         }
         id => "logstash-nginx-requests"
       }
