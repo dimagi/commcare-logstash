@@ -23,7 +23,7 @@ output {
         host => "{{ prometheus_statsd_host|default('localhost') }}"
         port => {{ statsd_exporter_listen_udp|default(9125) }}
         codec => plain {
-            format => "nginx_requests:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},cache_status:%{cache_status},group:proxy,referer_group:%{referer_group}"
+            format => "nginx_requests:1|c|#environment:{{ env_monitoring_id }},domain:%{domain},http_method:%{http_method},status_code:%{status_code},url_group:%{url_group},cache_status:%{cache_status},group:proxy,referer_group:%{referer_group},duration:%{duration}"
         }
         id => "logstash-nginx-requests"
       }
