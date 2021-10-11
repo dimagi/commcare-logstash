@@ -43,6 +43,13 @@
             mutate {
                 add_field => { "{{ output_field }}" => "static" }
             }
+        } else if [{{ input_field }}] =~ "/hq/" {
+            mutate {
+                split => ["{{ input_field }}", "/"]
+            }
+            mutate {
+                add_field => { "{{ output_field }}" => "%{[{{ input_field }}][1]}/%{[{{ input_field }}][2]}"}
+            }
         } else if [{{ input_field }}] =~ "^/a/[0-9a-z-]+" {
             mutate {
                 split => ["{{ input_field }}", "/"]
@@ -127,6 +134,31 @@ filter {
         }    
         mutate {
             convert => { "apdex" => "float" }
+        }
+
+        # Set duration
+        if [request_time] {
+            if [request_time] < 1 {
+                mutate {
+                    add_field => { "duration" => "lt_001s" }
+                }
+            } else if [request_time] < 5 {
+                mutate {
+                    add_field => { "duration" => "lt_005s" }
+                }
+            } else if [request_time] < 20 {
+                mutate {
+                    add_field => { "duration" => "lt_020s" }
+                }
+            } else if [request_time] < 120 {
+                mutate {
+                    add_field => { "duration" => "lt_120s" }
+                }                
+            } else {
+                mutate {
+                    add_field => { "duration" => "over_120s" }
+                }
+            }
         }
 
         # Calculate Bandwidth
